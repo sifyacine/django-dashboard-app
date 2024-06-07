@@ -1,0 +1,91 @@
+import 'package:flutter/material.dart';
+import 'package:todo/ajoutEmp.dart';
+import 'package:todo/ajoutEns.dart';
+import 'package:todo/widgets/dashboard_widgets/my_drawer.dart';
+
+void main() {
+  runApp(MaterialApp(
+    theme: ThemeData(),
+    debugShowCheckedModeBanner: false,
+    home: const Employe(),
+  ));
+}
+
+// ignore: camel_case_types
+class Employe extends StatelessWidget {
+  const Employe({super.key});
+
+  get bottomNavigationBar => null;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Employée',
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        elevation: 0.0,
+        backgroundColor: const Color.fromARGB(255, 24, 26, 162),
+      ),
+      drawer: const MyDrawer(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 30.0),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AjoutEmp();
+                            },
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(224, 255, 0, 34)),
+                        child: const Text(
+                          'Ajouter Employé',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AjoutEns();
+                            },
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(224, 255, 0, 34)),
+                        child: const Text(
+                          'Ajouter Enseignant',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
